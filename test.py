@@ -15,7 +15,7 @@ class TestStringMethods(unittest.TestCase):
         for input, output in tests:
             result = get_new_filename(input)
             self.assertEqual(result, output,
-                    msg=f"with input {input} got {result} instead of {output} (desired)")
+                    msg=f"with input {input} got {result} instead of {output}")
 
 
 if __name__ == '__main__':

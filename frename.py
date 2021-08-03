@@ -1,9 +1,8 @@
 import argparse
 from urllib.parse import unquote
+from copy import copy
 
 default_illegal_characters = set(("$", "#", "%", "&", "{", "}", "\\", "<", ">", "*", "?", "/", ' ', "!", "'", '"', ":", "@", "+", "`", "|", "="))
-
-print(default_illegal_characters)
 
 def get_new_filename(old_filename: str) -> str:
 
@@ -13,11 +12,39 @@ def get_new_filename(old_filename: str) -> str:
     temp_name = temp_name.lower()
 
     # rebuild name, converting illegal characters
-    new_name = ""
+    rm_illegal = ""
     for c in temp_name:
         if c in default_illegal_characters:
-            new_name += '-'
+            rm_illegal += '-'
         else:
+            rm_illegal += c
+
+    # remove extra instances of '-'
+    new_name = copy(rm_illegal)
+    changed = True
+    while changed:
+        old_string = copy(new_name)
+        changed = False
+        new_name = ""
+        for i, c in enumerate(old_string):
+            if c == '-':
+                # beginning
+                if i == 0: 
+                    changed = True
+                    continue
+                # repeat '-'
+                if old_string[i-1] == '-': 
+                    changed = True
+                    continue
+                # at end of entire name 
+                if i == len(old_string)-1:
+                    changed = True
+                    continue
+                # at end of name before extension
+                if i+1 < len(old_string) and old_string[i+1] == '.': 
+                    changed = True
+                    continue
+
             new_name += c
 
     return new_name
