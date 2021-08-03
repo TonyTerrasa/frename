@@ -11,7 +11,7 @@ We want to convert a variety of mistakes in filenames into more legal, standardi
 ### Illegal characters
 For this, we want to make sure all filenames are compatible with the "least common demoninator" in terms of what characters are allowed
 
-````$, #, %, &, {, }, \, <, >, *, ?, /, ' ', !, ', ", :, @, +, `, |, = ```
+```$, #, %, &, {, }, \, <, >, *, ?, /, ' ', !, ', ", :, @, +, `, |, = ```
 
 would love to catch the common ones that are like %20 (space) see [percent encoding](https://en.wikipedia.org/wiki/Percent-encoding) and convert them into '-', might have to be a first pass at the string kind of thing. This can be easily accomplished with [`urllib.parse`](https://docs.python.org/3/library/urllib.parse.html).
 
