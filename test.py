@@ -6,8 +6,8 @@ class TestStringMethods(unittest.TestCase):
 
     def test_remove_characters(self):
         tests = [
-            ("(Seale PHYS111) Syllabus Fall 16.doc", "(seale-phys111)-syllabus-fall-16.doc"),
-            ("Rec+20+WS+solutions.pdf", "rec-20-ws-solutions.pdf"),
+            ("(Foo PHYS111) Syllabus Fall 16.doc", "(foo-phys111)-syllabus-fall-16.doc"),
+            ("Rec+20+WS+solutions<<.pdf", "rec-20-ws-solutions.pdf"),
             ("Sweet%20Victory%20-%20Tuba.pdf", "sweet-victory-tuba.pdf"),
             ("Template%20%28Yellow%20Card%29%20%", "template-(yellow-card)"),
             ]

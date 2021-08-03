@@ -1,5 +1,5 @@
 import argparse
-
+from urllib.parse import unquote
 
 default_illegal_characters = set(("$", "#", "%", "&", "{", "}", "\\", "<", ">", "*", "?", "/", ' ', "!", "'", '"', ":", "@", "+", "`", "|", "="))
 
@@ -7,10 +7,14 @@ print(default_illegal_characters)
 
 def get_new_filename(old_filename: str) -> str:
 
-    name_lower_case = old_filename.lower()
-    new_name = ""
+    # unquote converts percent encoding to utf-8
+    # convert to lower case
+    temp_name = unquote(old_filename)
+    temp_name = temp_name.lower()
 
-    for c in name_lower_case:
+    # rebuild name, converting illegal characters
+    new_name = ""
+    for c in temp_name:
         if c in default_illegal_characters:
             new_name += '-'
         else:

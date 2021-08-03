@@ -11,11 +11,9 @@ We want to convert a variety of mistakes in filenames into more legal, standardi
 ### Illegal characters
 For this, we want to make sure all filenames are compatible with the "least common demoninator" in terms of what characters are allowed
 
-`
-$, #, %, &, {, }, \, <, >, *, ?, /, ' ', !, ', ", :, @, +, `, |, =
-`
+`$, #, %, &, {, }, \, <, >, *, ?, /, ' ', !, ', ", :, @, +, \`, |, = `
 
-would love to catch the common ones that are like %20 (space) see [percent encoding](https://en.wikipedia.org/wiki/Percent-encoding) and convert them into '-', might have to be a first pass at the string kind of thing
+would love to catch the common ones that are like %20 (space) see [percent encoding](https://en.wikipedia.org/wiki/Percent-encoding) and convert them into '-', might have to be a first pass at the string kind of thing. This can be easily accomplished with [`urllib.parse`](https://docs.python.org/3/library/urllib.parse.html).
 
 parenthases could be optional parameter to remove them. in my bash shell, these need to be escaped so I would like to avoid them if at all possible
 
@@ -30,10 +28,10 @@ if over limit, should always prompt for something
 
 | Old                                 | New                                 | Comments                            |
 | -----------                         | -----------                         | -----------                         |
-| (SealePHYS111) Syllabus Fall 16.doc | seale-phys111-syllabus-fall-16.doc  |                                     |
-| Rec+20+WS+solutions.pdf             | rec-20-ws-solution.pdf              |                                     |
-| Sweet%20Victory%20-%20Tuba.pdf      | sweet-victory-tuba.pdf              |                                     |
-| Template%20%28Yellow%20Card%29%20%  | template-(yellow-card)              |                                     |
+| (Foo PHYS111) Syllabus Fall 16.doc  | foo-phys111-syllabus-fall-16.doc    | remove parens and spaces            |
+| Rec+20+WS+solutions<<.pdf           | rec-20-ws-solution.pdf              | remove +, <                         |
+| Template%20%28Yellow%20Card%29%20%  | template-(yellow-card)              | convert percent encoding            |
+| Sweet%20Victory%20-%20Tuba.pdf      | sweet-victory-tuba.pdf              | convert percent encoding, remove repeat `-`                                    |
 
 
 
